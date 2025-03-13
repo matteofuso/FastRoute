@@ -1,14 +1,11 @@
 <?php
 
-if (!Database::isConnected())
-{
-    $_GET['err'] = '0';
-}
-
 if (isset($_GET['err'])) {
     $errors = [
         '-1' => 'Errore generico',
         '0' => 'Impossibile connettersi al database',
+        '1' => 'Errore nella richiesta',
+        '2' => 'Email o password errati',
     ];
     $err = $_GET['err'];
     if (!array_key_exists($err, $errors)) {

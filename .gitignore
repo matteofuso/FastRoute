@@ -1,2 +1,6 @@
 *.log
 config.php
+
+composer.json
+composer.lock
+vendor/
