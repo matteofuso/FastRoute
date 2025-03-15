@@ -6,6 +6,13 @@ if (isset($_GET['err'])) {
         '0' => 'Impossibile connettersi al database',
         '1' => 'Errore nella richiesta',
         '2' => 'Email o password errati',
+        '3' => 'Errore di autenticazione',
+        '4' => 'Errore nel recupero dei dati',
+        '5' => 'Le password non corrispondono',
+        '6' => 'Compila tutti i campi',
+        '7' => 'Password attuale errata',
+        '8' => 'La password deve contenere almeno 8 caratteri, di cui almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale',
+        '9' => 'Pacco non trovato',
     ];
     $err = $_GET['err'];
     if (!array_key_exists($err, $errors)) {

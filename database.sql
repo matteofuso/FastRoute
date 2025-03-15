@@ -4,12 +4,13 @@ use fastroute;
 create table sedi(
                      id int primary key auto_increment,
                      nome varchar(100) not null,
-                     citta varchar(100) not null
+                     citta varchar(100) not null,
+                     unique (nome, citta)
 );
 
 create table clienti(
                         id int primary key auto_increment,
-                        email varchar(100) not null,
+                        email varchar(100) unique not null,
                         punti_utilizzato int not null,
                         numero varchar(20) not null,
                         indirizzo varchar(200) not null,
@@ -43,7 +44,7 @@ create table destinatari(
 
 create table personale(
                           id int primary key auto_increment,
-                          email varchar(100) not null,
+                          email varchar(100) unique not null,
                           password varchar(200) not null,
                           nome varchar(100) not null,
                           cognome varchar(100) not null,

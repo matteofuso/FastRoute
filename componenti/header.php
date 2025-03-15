@@ -1,22 +1,26 @@
 <?php
-/**@var $nav_page */
-/**@var $main_classes */
 $root = $root ?? '';
 require $root . 'utils/Session.php';
 $title = $title ?? "FastRoute";
 $main_classes = $main_classes ?? 'container my-4';
-$curr_page = basename($_SERVER['PHP_SELF']);
 $pages = isset($_SESSION['id']) ? [
     "index.php" => "Homepage",
-    "tracciamento.php" => "Tracciamento",
+    "tracking/track.php" => "Tracciamento",
     "personale/inserimento_plico.php" => "Inserimento Plico",
     "personale/ricerca.php" => "Ricerca",
     "personale/clienti.php" => "Clienti",
-    "personale/spedizioni.php" => "Spedizioni",
 ] : [
     "index.php" => "Homepage",
-    "tracciamento.php" => "Tracciamento",
+    "show.php" => "Tracciamento",
 ];
+
+$curr_page = '';
+foreach ($pages as $link => $page) {
+    if (str_ends_with($_SERVER['PHP_SELF'], $link)) {
+        $curr_page = $link;
+        break;
+    }
+}
 ?>
 
 <!doctype html>

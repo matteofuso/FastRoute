@@ -53,6 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             panic(5);
         }
 
+        // pass security check
+        if (strlen($new_password) < 8 || !preg_match('/[0-9]/', $new_password) || !preg_match('#[A-Z]#', $new_password) || !preg_match('#[a-z]#', $new_password) || !preg_match('#[_!@\#$%^&*]#', $new_password)) {
+            panic(8);
+        }
+
         $password = password_hash($new_password, PASSWORD_DEFAULT);
     }
 

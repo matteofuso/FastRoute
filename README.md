@@ -5,4 +5,5 @@
 4. Caricare il database con il file `database.sql`
 5. Controllare che PHP abbia i permessi per scrivere nella cartella
 6. Controllare la presenza di `PDO MySQL`
-7. Avviare il server
+7. Installare il pacchetto `phpmailer/phpmailer` con `composer require phpmailer/phpmailer`'
+8. Avviare il server
