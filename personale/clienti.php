@@ -20,7 +20,7 @@ require '../componenti/header.php'; ?>
                     Helpers::printTable(['ID', 'Nome', 'Cognome', 'Email', 'Numero', 'Indirizzo'], $clienti);
                 }
             } catch (Exception $e) {
-                Log::errlog($e->getMessage());
+                Log::errlog($e);
                 echo '<div class="alert alert-danger">Errore nel recupero dei clienti</div>';
             }
         ?>

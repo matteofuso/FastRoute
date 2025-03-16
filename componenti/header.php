@@ -11,7 +11,7 @@ $pages = isset($_SESSION['id']) ? [
     "personale/clienti.php" => "Clienti",
 ] : [
     "index.php" => "Homepage",
-    "show.php" => "Tracciamento",
+    "tracking/track.php" => "Tracciamento",
 ];
 
 $curr_page = '';

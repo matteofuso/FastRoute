@@ -6,7 +6,7 @@ $config = include '../config.php';
 
 function panic($error_id = -1, $referer = '..')
 {
-    header("Location: ../login.php?ref=$referer&err=$error_id");
+    header("Location: ../personale/login.php?ref=$referer&err=$error_id");
     die();
 }
 
