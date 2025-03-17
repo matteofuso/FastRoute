@@ -124,7 +124,7 @@
                     <h2 class="card-title h4 mb-0">Richiedi informazioni</h2>
                 </div>
                 <div class="card-body">
-                    <form action="processa_richiesta.php" method="POST">
+                    <form action="actions/richiesta_informazioni.php" method="POST">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="nome" class="form-label">Nome</label>

@@ -50,8 +50,12 @@ $stato_plico = match (true) {
     !empty($plico->arrivo) => 'Arrivato',
     !empty($plico->partenza) => 'In transito',
     default => 'Consegnato'
-}
+};
 
+// Genera l'URL completo per il QR code
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$host = empty($config['qr_host']) ? $protocol . "://" . $_SERVER['HTTP_HOST'] : $config['qr_host'];
+$currentUrl = $host . $_SERVER['REQUEST_URI'];
 ?>
 <?php require '../componenti/header.php'; ?>
 
@@ -93,6 +97,16 @@ $stato_plico = match (true) {
                         </table>
                     </div>
 
+                    <!-- QR Code -->
+                    <div class="col-md-6 mb-4 text-center">
+                        <h5 class="border-bottom pb-2">QR Code Tracking</h5>
+                        <div class="mt-3">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?data=<?php echo urlencode($currentUrl); ?>&format=svg"
+                                 class="img-fluid" alt="QR Code per tracking">
+                            <p class="mt-2 small text-muted">Scansiona per seguire questo plico</p>
+                        </div>
+                    </div>
+
                     <!-- Mittente -->
                     <div class="col-md-6 mb-4">
                         <h5 class="border-bottom pb-2">Mittente</h5>
@@ -119,29 +133,29 @@ $stato_plico = match (true) {
 
                     <!-- Date di consegna -->
                     <?php if ($plico->partenza): ?>
-                    <div class="col-md-12 mb-4">
-                        <h5 class="border-bottom pb-2">Date di consegna</h5>
-                        <table class="table table-sm">
+                        <div class="col-md-12 mb-4">
+                            <h5 class="border-bottom pb-2">Date di consegna</h5>
+                            <table class="table table-sm">
                                 <tr>
                                     <th style="width: 40%;">Data di partenza:</th>
                                     <td><?php echo date('d/m/Y H:i', strtotime($plico->partenza)); ?></td>
                                 </tr>
 
-                            <?php if ($plico->arrivo): ?>
-                                <tr>
-                                    <th>Data di arrivo:</th>
-                                    <td><?php echo date('d/m/Y H:i', strtotime($plico->arrivo)); ?></td>
-                                </tr>
-                            <?php endif; ?>
+                                <?php if ($plico->arrivo): ?>
+                                    <tr>
+                                        <th>Data di arrivo:</th>
+                                        <td><?php echo date('d/m/Y H:i', strtotime($plico->arrivo)); ?></td>
+                                    </tr>
+                                <?php endif; ?>
 
-                            <?php if ($plico->ritiro): ?>
-                                <tr>
-                                    <th>Data di ritiro:</th>
-                                    <td><?php echo date('d/m/Y H:i', strtotime($plico->ritiro)); ?></td>
-                                </tr>
-                            <?php endif; ?>
-                        </table>
-                    </div>
+                                <?php if ($plico->ritiro): ?>
+                                    <tr>
+                                        <th>Data di ritiro:</th>
+                                        <td><?php echo date('d/m/Y H:i', strtotime($plico->ritiro)); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            </table>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

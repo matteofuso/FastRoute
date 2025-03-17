@@ -8,6 +8,7 @@ $pages = isset($_SESSION['id']) ? [
     "tracking/track.php" => "Tracciamento",
     "personale/inserimento_plico.php" => "Inserimento Plico",
     "personale/ricerca.php" => "Ricerca",
+    "personale/dashboard.php" => "Dashboard",
     "personale/clienti.php" => "Clienti",
 ] : [
     "index.php" => "Homepage",
@@ -76,7 +77,7 @@ foreach ($pages as $link => $page) {
                 </div>
             <?php else: ?>
                 <!-- User is not logged in - show login button -->
-                <a href="<?= $root ?>personale/login.php?ref=<?= $_SERVER['PHP_SELF'] ?>"
+                <a href="<?= $root ?>personale/login.php?ref=<?= $_SERVER['PHP_SELF']?>"
                    class="btn btn-bd-primary bg-primary mx-3 text-white text-decoration-none d-flex align-baseline">
                     <i class="bi bi-person me-2"></i>
                     <span>Login</span>

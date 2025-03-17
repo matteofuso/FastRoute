@@ -46,22 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
 
         $risultati = Database::select($sqlGiorni, $bindGiorni);
-
-        // Query per statistiche consegne per sede destinazione
-        $sqlSedi = "SELECT s.nome as sede, COUNT(p.id) as conteggio
-                   FROM plichi p
-                   JOIN sedi s ON p.destinazione = s.id
-                   WHERE DATE(p.ritiro) BETWEEN :dataInizio AND :dataFine
-                   AND p.ritiro IS NOT NULL
-                   GROUP BY p.destinazione
-                   ORDER BY conteggio DESC";
-
-        $bindSedi = [
-            ':dataInizio' => $dataInizio,
-            ':dataFine' => $dataFine
-        ];
-
-        $statisticheSedi = Database::select($sqlSedi, $bindSedi);
     } catch (Exception $e) {
         Log::errlog($e);
         echo '<div class="alert alert-danger">Si è verificato un errore durante l\'esecuzione della query.</div>';
@@ -163,33 +147,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-
-            <?php if (count($statisticheSedi) > 0): ?>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card shadow border-0">
-                            <div class="card-header bg-warning text-dark">
-                                <h4 class="mb-0"><i class="fas fa-building me-2"></i>Consegne per sede</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <?php foreach ($statisticheSedi as $sede): ?>
-                                        <div class="col-md-4 mb-3">
-                                            <div class="card border-0 shadow-sm">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?php echo $sede->sede; ?></h5>
-                                                    <h2 class="text-warning"><?php echo $sede->conteggio; ?></h2>
-                                                    <p class="text-muted">plichi consegnati</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
         <?php endif; ?>
     </div>
 

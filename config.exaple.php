@@ -14,4 +14,6 @@ return [
     'mail_smtps' => true,
     'mail_auth' => true,
     'mail_port' => 465,
+
+    'qr_host' => '',
 ];

@@ -19,6 +19,9 @@ class Mailer{
             self::$mail->SMTPSecure = $config['mail_smtps'] ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
             self::$mail->Port = $config['mail_port'];
             self::$mail->setFrom($config['mail_user'], $config['mail_name']);
+            self::$mail->CharSet = 'UTF-8';
+            self::$mail->Encoding = 'base64';
+            self::$mail->isHTML(true);
         } catch (Exception $e) {
             self::$mail = null;
         }
@@ -30,16 +33,12 @@ class Mailer{
         }
         try {
             self::$mail->addAddress($to);
-            self::$mail->isHTML(true);
             self::$mail->Subject = $subject;
             self::$mail->Body = $body;
-            self::$mail->CharSet = 'UTF-8';
-            self::$mail->Encoding = 'base64';
             self::$mail->send();
             return true;
         } catch (Exception $e) {
             return false;
         }
-
     }
 }

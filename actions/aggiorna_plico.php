@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 inner join clienti c on c.id = p.cliente 
 where p.id = :id", [':id' => $id_plico])[0];
 
-            $mail = Mailer::send($plico->email, 'Ritiro plico', 'Il plico è stato ritirato');
+            $mail = Mailer::send($plico->email, 'Plico Ritirato', 'Il plico con id ' . $id_plico . ' è stato ritirato dal destinatario.<br>Grazie per aver scelto FastRoute!');
 
         } else {
             panic(2);
